@@ -1,32 +1,33 @@
-# gulp-workflow
+# workflow
+> A simple, opinionated tool to manage your Gulp workflow
 
-> A simple, opinionated tool to managing your Gulp workflow
-
-Workflow is here to help with standardising Gulp setups across multiple projects. It surfaces the main workflow tasks in a clean and consise manner making it simple for people to build the applications.
+Workflow is here to help with standardising Gulp setups across multiple projects. It surfaces the main workflow tasks in a clean and concise manner making it simple for people to compile those applications.
 
 ## Setup
+Your `gulpfile.js` should only contain the main tasks that you should be run by yourself, contributors or CI environments. These are called `tasks`. These `tasks` can then run a series of other `tasks` or `subtasks`. `Subtasks` are more granular tasks that do one simple thing. The `subtasks` you pass to a given `task` are run through [`run-sequnce`](https://www.npmjs.com/package/run-sequence) allowing you to run them in series or parallel.
 
-Your `gulpfile.js` should only contain the main tasks that you want to run. These are called `tasks`. These `tasks` can then run a series of other `tasks` or `subtasks`. `Subtasks` are more granular tasks that do one simple thing. The `subtasks` you pass to a given `task` are run through [`run-sequnce`](https://www.npmjs.com/package/run-sequence) allowing you to run them in series or parallel.
-
-`gulp-workflow` relies on there being a `gulp` folder in the root of the project where all tasks are kept along with a `config` folder. The `config` folder is where you can store configurations needed for your `tasks`. If a `gulp.conf.js` file is present, then `gulp-workflow` will pick that up and pass it back to your `tasks`.
+`workflow` has it's own ideas about where tasks should live.
 
 ```
 +-- gulp
 |   +-- config
 |   |   +-- gulp.conf.js
 |   +-- eslint.js
+|   +-- build-js.js
+|   +-- build-css.js
 +-- package.json
 +-- gulpfile.js
 ```
+The `config` folder is where you can store configurations needed for your `tasks`, i.e. `webpack.conf.js`. If a `gulp.conf.js` file is present, then `workflow` will pick that up and pass it back to your `tasks`.
 
 ```javascript
 // gulpfile.js
 
-// Import `gulp-workflow` into your `gulpfile`
+// Import `workflow` into your `gulpfile`
 const gulp = require('gulp');
-const workflow = require('gulp-workflow');
+const workflow = require('workflow');
 
-// Load `gulp-workflow`, passing it your projects instance of `gulp`
+// Load `workflow`, passing it your projects instance of `gulp`
 workflow
     .load(gulp)
     .task('lint', 'Run all linters.', ['eslint'])
@@ -103,7 +104,7 @@ Available tasks
 ```
 
 #### Running subtasks
-Again, they're just oridanry `gulp` tasks so you can run them individually, i.e. `gulp eslint`
+Again, they're just ordinary `gulp` tasks so you can run them individually, i.e. `gulp eslint`
 
 ## API
 
@@ -111,7 +112,7 @@ Again, they're just oridanry `gulp` tasks so you can run them individually, i.e.
 Requires an instance of `gulp`. Loads the subtasks present in the `gulp` folder.
 
 #### task(name, description, [tasks])
-Takes a name, descripton and array of tasks to run when called. The array of tasks is passed to [`run-sequnce`](https://www.npmjs.com/package/run-sequence) so can support their syntax.
+Takes a name, description and array of tasks to run when called. The array of tasks is passed to [`run-sequnce`](https://www.npmjs.com/package/run-sequence) so can support their syntax.
 
 #### subtask(name, dependencies, func)
 Takes a name, any dependencies and array of tasks to run when called. This functions in exactly the same way as a normal `gulp` task.
