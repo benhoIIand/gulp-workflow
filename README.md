@@ -122,3 +122,7 @@ Takes a name, any dependencies and array of tasks to run when called. This funct
 To make sure your tasks are being loaded correctly, you can run any gulp command with a `debug` flag
 
     gulp lint --debug
+
+## License
+
+MIT © [Ben Holland](https://benholland.me)
