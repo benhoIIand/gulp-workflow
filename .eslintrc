@@ -1,0 +1,12 @@
+{
+    "extends": "social",
+    "env": {
+        "jasmine": true
+    },
+    "globals": {
+        "__DEV__": true,
+        "__PROD__": true,
+        "angular": true,
+        "inject": true
+    }
+}
