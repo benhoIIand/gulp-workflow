@@ -1,14 +1,13 @@
 {
   "name": "gulp-workflow",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A simple, opinionated tool to managing your Gulp workflow",
   "main": "index.compiled.js",
   "scripts": {
     "test": "npm run lint",
     "build": "./node_modules/.bin/babel index.js --out-file index.compiled.js",
     "lint": "./node_modules/.bin/eslint index.js",
-    "prepublish": "npm run lint",
-    "install": "build"
+    "prepublish": "npm run lint"
   },
   "author": "Ben Holland <hi@benholland.me> (https://benholland.me)",
   "license": "MIT",

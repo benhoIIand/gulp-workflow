@@ -3,4 +3,3 @@ node_modules/
 *.orig
 npm-debug.log
 .DS_Store
-index.compiled.js
