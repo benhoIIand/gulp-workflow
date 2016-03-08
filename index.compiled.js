@@ -40,14 +40,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var CWD = process.cwd(); /* eslint no-console:0 */
 
 var GULP_DIR = _path2.default.resolve(CWD + '/gulp');
-var GULP_CONFIG = _path2.default.resolve(GULP_DIR + '/config/gulp.conf.js');
+var GULP_CONFIG_PATH = _path2.default.resolve(GULP_DIR + '/config/gulp.conf.js');
 
 var $ = (0, _gulpLoadPlugins2.default)({
     config: _path2.default.resolve(CWD + '/package.json')
 });
-var config = Object.assign({}, require(GULP_CONFIG) || {}, { args: _yargs2.default.argv });
 
 var gulp = void 0;
+var originalGulpConfig = void 0;
+
+try {
+    originalGulpConfig = require(GULP_CONFIG_PATH);
+} catch (e) {
+    originalGulpConfig = {};
+}
+
+var config = Object.assign({}, { args: _yargs2.default.argv });
+
+log(_chalk2.default.yellow.bold('Original gulp config', JSON.stringify(originalGulpConfig)));
+log(_chalk2.default.yellow.bold('Merged gulp config', JSON.stringify(config)));
 
 function load(_gulp) {
     var _this = this;

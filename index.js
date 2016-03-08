@@ -9,14 +9,25 @@ import loadPlugins from 'gulp-load-plugins';
 
 const CWD = process.cwd();
 const GULP_DIR = path.resolve(`${CWD}/gulp`);
-const GULP_CONFIG = path.resolve(`${GULP_DIR}/config/gulp.conf.js`);
+const GULP_CONFIG_PATH = path.resolve(`${GULP_DIR}/config/gulp.conf.js`);
 
 const $ = loadPlugins({
     config: path.resolve(`${CWD}/package.json`)
 });
-const config = Object.assign({}, require(GULP_CONFIG) || {}, { args: yargs.argv });
 
 let gulp;
+let originalGulpConfig;
+
+try {
+    originalGulpConfig = require(GULP_CONFIG_PATH);
+} catch (e) {
+    originalGulpConfig = {};
+}
+
+const config = Object.assign({}, { args: yargs.argv });
+
+log(chalk.yellow.bold('Original gulp config', JSON.stringify(originalGulpConfig)));
+log(chalk.yellow.bold('Merged gulp config', JSON.stringify(config)));
 
 export function load(_gulp) {
     if (!_gulp) {
