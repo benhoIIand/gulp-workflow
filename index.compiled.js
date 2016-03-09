@@ -55,7 +55,7 @@ try {
     originalGulpConfig = {};
 }
 
-var config = Object.assign({}, { args: _yargs2.default.argv });
+var config = Object.assign({}, originalGulpConfig, { args: _yargs2.default.argv });
 
 log(_chalk2.default.yellow.bold('Original gulp config', JSON.stringify(originalGulpConfig)));
 log(_chalk2.default.yellow.bold('Merged gulp config', JSON.stringify(config)));

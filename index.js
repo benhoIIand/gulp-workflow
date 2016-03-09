@@ -24,7 +24,7 @@ try {
     originalGulpConfig = {};
 }
 
-const config = Object.assign({}, { args: yargs.argv });
+const config = Object.assign({}, originalGulpConfig, { args: yargs.argv });
 
 log(chalk.yellow.bold('Original gulp config', JSON.stringify(originalGulpConfig)));
 log(chalk.yellow.bold('Merged gulp config', JSON.stringify(config)));
