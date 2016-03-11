@@ -3,6 +3,10 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; }; /* eslint no-console:0 */
+
+
 exports.load = load;
 exports.task = task;
 exports.subtask = subtask;
@@ -37,8 +41,7 @@ var _gulpLoadPlugins2 = _interopRequireDefault(_gulpLoadPlugins);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CWD = process.cwd(); /* eslint no-console:0 */
-
+var CWD = process.cwd();
 var GULP_DIR = _path2.default.resolve(CWD + '/gulp');
 var GULP_CONFIG_PATH = _path2.default.resolve(GULP_DIR + '/config/gulp.conf.js');
 
@@ -83,10 +86,20 @@ function load(_gulp) {
 }
 
 function task(name, description, subtasks) {
+    var args = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+
+    if (isObject(name)) {
+        var options = name;
+        name = options.name;
+        description = options.description;
+        subtasks = options.subtasks;
+        args = options.args;
+    }
+
     log(_chalk2.default.magenta.bold('Loading task:', name));
     gulp.task(name, description, function (done) {
         return _runSequence2.default.use(gulp).apply(_runSequence2.default, subtasks.concat([done]));
-    });
+    }, { options: args });
     log(_chalk2.default.green.bold('Loaded task:', name));
 
     return this;
@@ -109,6 +122,11 @@ function log(msg) {
     if (config.args.debug) {
         console.log(msg);
     }
+}
+
+function isObject(value) {
+    var type = typeof value === 'undefined' ? 'undefined' : _typeof(value);
+    return !!value && (type === 'object' || type === 'function');
 }
 
 exports.default = {

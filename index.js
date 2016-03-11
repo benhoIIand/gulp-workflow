@@ -49,9 +49,17 @@ export function load(_gulp) {
     return this;
 }
 
-export function task(name, description, subtasks) {
+export function task(name, description, subtasks, args = {}) {
+    if (isObject(name)) {
+        const options = name;
+        name = options.name;
+        description = options.description;
+        subtasks = options.subtasks;
+        args = options.args;
+    }
+
     log(chalk.magenta.bold('Loading task:', name));
-    gulp.task(name, description, (done) => runSequence.use(gulp).apply(runSequence, subtasks.concat([done])));
+    gulp.task(name, description, (done) => runSequence.use(gulp).apply(runSequence, subtasks.concat([done])), { options: args });
     log(chalk.green.bold('Loaded task:', name));
 
     return this;
@@ -69,6 +77,11 @@ function log(msg) {
     if (config.args.debug) {
         console.log(msg);
     }
+}
+
+function isObject(value) {
+    const type = typeof value;
+    return !!value && (type === 'object' || type === 'function');
 }
 
 export default {

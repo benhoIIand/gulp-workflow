@@ -111,8 +111,10 @@ Again, they're just ordinary `gulp` tasks so you can run them individually, i.e.
 #### load(gulp)
 Requires an instance of `gulp`. Loads the subtasks present in the `gulp` folder.
 
-#### task(name, description, [tasks])
-Takes a name, description and array of tasks to run when called. The array of tasks is passed to [`run-sequnce`](https://www.npmjs.com/package/run-sequence) so can support their syntax.
+#### task(name, description, [tasks], args || [options])
+Takes a name, descriptionm, array of tasks to run when called and an object containing any arguments that can be passed. The array of tasks is passed to [`run-sequnce`](https://www.npmjs.com/package/run-sequence) so can support their syntax.
+
+Alternatively, you can pass it an object of `options` which use the same arguments as keys.
 
 #### subtask(name, dependencies, func)
 Takes a name, any dependencies and array of tasks to run when called. This functions in exactly the same way as a normal `gulp` task.
