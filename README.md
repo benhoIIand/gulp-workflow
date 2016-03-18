@@ -4,7 +4,7 @@
 Workflow is here to help with standardising Gulp setups across multiple projects. It surfaces the main workflow tasks in a clean and concise manner making it simple for people to compile those applications.
 
 ## Setup
-Your `gulpfile.js` should only contain the main tasks that you should be run by yourself, contributors or CI environments. These are called `tasks`. These `tasks` can then run a series of other `tasks` or `subtasks`. `Subtasks` are more granular tasks that do one simple thing. The `subtasks` you pass to a given `task` are run through [`run-sequnce`](https://www.npmjs.com/package/run-sequence) allowing you to run them in series or parallel.
+Your `gulpfile.js` should only contain the main tasks that you should be run by yourself, contributors or CI environments. These are called `tasks`. These `tasks` can then run a series of other `tasks` or `subtasks`. `Subtasks` are more granular tasks that do one simple thing. The `subtasks` you pass to a given `task` are run through [`run-sequence`](https://www.npmjs.com/package/run-sequence) allowing you to run them in series or parallel.
 
 `workflow` has it's own ideas about where tasks should live.
 
@@ -112,7 +112,7 @@ Again, they're just ordinary `gulp` tasks so you can run them individually, i.e.
 Requires an instance of `gulp`. Loads the subtasks present in the `gulp` folder.
 
 #### task(name, description, [tasks], args || [options])
-Takes a name, descriptionm, array of tasks to run when called and an object containing any arguments that can be passed. The array of tasks is passed to [`run-sequnce`](https://www.npmjs.com/package/run-sequence) so can support their syntax.
+Takes a name, description, array of tasks to run when called and an object containing any arguments that can be passed. The array of tasks is passed to [`run-sequence`](https://www.npmjs.com/package/run-sequence) so can support their syntax.
 
 Alternatively, you can pass it an object of `options` which use the same arguments as keys.
 
