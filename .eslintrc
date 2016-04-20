@@ -1,12 +1,17 @@
 {
-    "extends": "social",
-    "env": {
-        "jasmine": true
-    },
-    "globals": {
-        "__DEV__": true,
-        "__PROD__": true,
-        "angular": true,
-        "inject": true
+    "extends": "eslint-config-airbnb/base",
+    "rules": {
+        "comma-dangle": 0,
+        "indent": [2, 4, {
+            "VariableDeclarator": 1
+        }],
+        "max-len": [1, 140, 4, {
+            "ignoreComments": true,
+            "ignoreUrls": true
+        }],
+        "one-var": 0,
+        "one-var-declaration-per-line": 0,
+        "no-param-reassign": 0,
+        "no-use-before-define": 0
     }
 }
