@@ -25,7 +25,7 @@ The `config` folder is where you can store configurations needed for your `tasks
 
 // Import `workflow` into your `gulpfile`
 const gulp = require('gulp');
-const workflow = require('workflow');
+const workflow = require('gulp-workflow');
 
 // Load `workflow`, passing it your projects instance of `gulp`
 workflow
