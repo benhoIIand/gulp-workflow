@@ -6,6 +6,7 @@ import gulpHelp from 'gulp-help';
 import yargs from 'yargs';
 import runSequence from 'run-sequence';
 import loadPlugins from 'gulp-load-plugins';
+import assignPolyfill from 'lodash.assign';
 
 const CWD = process.cwd();
 const GULP_DIR = path.resolve(`${CWD}/gulp`);
@@ -17,6 +18,8 @@ const $ = loadPlugins({
 
 let gulp;
 let originalGulpConfig;
+
+Object.assign = Object.assign || assignPolyfill;
 
 try {
     originalGulpConfig = require(GULP_CONFIG_PATH);
