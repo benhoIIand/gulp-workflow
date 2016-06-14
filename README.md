@@ -1,4 +1,10 @@
 # workflow
+
+[![npm version](https://badge.fury.io/js/gulp-workflow.svg)](http://badge.fury.io/js/gulp-workflow)
+[![Build Status](https://travis-ci.org/hollandben/gulp-workflow.png?branch=master)](https://travis-ci.org/hollandben/gulp-workflow)
+[![Dependency Status](https://david-dm.org/hollandben/gulp-workflow.svg)](https://david-dm.org/hollandben/gulp-workflow)
+[![Join the chat at https://gitter.im/hollandben/gulp-workflow](https://badges.gitter.im/hollandben/gulp-workflow.svg)](https://gitter.im/hollandben/gulp-workflow?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 > A simple, opinionated tool to manage your Gulp workflow
 
 Workflow is here to help with standardising Gulp setups across multiple projects. It surfaces the main workflow tasks in a clean and concise manner making it simple for people to compile those applications.
