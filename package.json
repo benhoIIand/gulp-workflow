@@ -11,8 +11,7 @@
     "url": "https://github.com/hollandben/gulp-workflow/issues"
   },
   "scripts": {
-    "build": "./node_modules/.bin/babel index.js --out-file index.compiled.js",
-    "watch": "./node_modules/.bin/babel index.js --watch --out-file index.compiled.js",
+    "build": "./node_modules/.bin/babel index.js --out-file index.js",
     "lint": "./node_modules/.bin/eslint index.js",
     "test": "./node_modules/.bin/jest"
   },
