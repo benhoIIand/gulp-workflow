@@ -1,4 +1,3 @@
-/* eslint no-console:0 */
 import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
@@ -8,15 +7,17 @@ import runSequence from 'run-sequence';
 import loadPlugins from 'gulp-load-plugins';
 import assignPolyfill from 'lodash.assign';
 
+const DIR_NAME = yargs.argv.directory || 'gulp';
+
 const CWD = process.cwd();
-const GULP_DIR = path.resolve(`${CWD}/gulp`);
+const GULP_DIR = path.resolve(`${CWD}/${DIR_NAME}`);
 const GULP_CONFIG_PATH = path.resolve(`${GULP_DIR}/config/gulp.conf.js`);
 
 const $ = loadPlugins({
     config: path.resolve(`${CWD}/package.json`)
 });
 
-let gulp;
+let gulpInstance;
 let originalGulpConfig;
 
 Object.assign = Object.assign || assignPolyfill;
@@ -37,14 +38,13 @@ export function load(_gulp) {
         throw new Error('An instance of gulp must be provided!');
     }
 
-    gulp = gulpHelp(_gulp);
+    gulpInstance = gulpHelp(_gulp);
 
     fs.readdirSync(GULP_DIR).forEach((file) => {
         if ((/.js$/).test(file)) {
             const filepath = `${GULP_DIR}/${file.split('.')[0]}`;
-
             log(chalk.magenta.bold('Loading file:', filepath));
-            require(filepath)(this, gulp, $, config);
+            require(filepath)(this, gulpInstance, $, config);
             log(chalk.green.bold('Loaded file:', filepath));
         }
     });
@@ -62,7 +62,7 @@ export function task(name, description, subtasks, args = {}) {
     }
 
     log(chalk.magenta.bold('Loading task:', name));
-    gulp.task(name, description, (done) => runSequence.use(gulp).apply(runSequence, subtasks.concat([done])), { options: args });
+    gulpInstance.task(name, description, (done) => runSequence.use(gulpInstance).apply(runSequence, subtasks.concat([done])), { options: args });
     log(chalk.green.bold('Loaded task:', name));
 
     return this;
@@ -70,7 +70,7 @@ export function task(name, description, subtasks, args = {}) {
 
 export function subtask(name, ...args) {
     log(chalk.magenta.bold('Loading subtask:', name));
-    gulp.task.apply(gulp, [name, false].concat(args));
+    gulpInstance.task.apply(gulpInstance, [name, false].concat(args));
     log(chalk.green.bold('Loaded task:', name));
 
     return this;

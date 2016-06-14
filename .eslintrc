@@ -1,17 +1,20 @@
 {
     "extends": "eslint-config-airbnb/base",
+    "env": {
+        "jasmine": true
+    },
     "rules": {
         "comma-dangle": 0,
+        "global-require": 0,
         "indent": [2, 4, {
             "VariableDeclarator": 1
         }],
-        "max-len": [1, 140, 4, {
-            "ignoreComments": true,
-            "ignoreUrls": true
-        }],
+        "max-len": 0,
+        "padded-blocks": 0,
         "one-var": 0,
         "one-var-declaration-per-line": 0,
         "no-param-reassign": 0,
+        "no-underscore-dangle": 0,
         "no-use-before-define": 0
     }
 }
